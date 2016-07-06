@@ -39,16 +39,22 @@ void UART0_SendInt(int out)
 	char c[10] = {0} ;
 	char m;
 	int32 i = 0 ;
+
+	if(out == 0)
+	{
+		c[0] = 48;
+		i = 0 ;
+	}
 	while(out)
 	{
 		m = (char)(out%10);
 		c[i++] = m + 48;
 		out = out/10;
 	}
-	c[i] = 0 ;
+	//c[i] = 48 ;
 	while(i != -1)
 	{
-		UART0_SendChr(c[--i]);
+		UART0_SendChr(c[i--]);
 	}
 
 }
